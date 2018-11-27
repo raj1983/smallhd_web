@@ -6,9 +6,17 @@
 <body id="page-top">
   {% include nav.html %}
   {% include header.html %}
-  {% include call-to-action.html %}
   {% include services.html %}
+  {% include call-to-action.html %}
   {% include portfolio.html %}
+  <ul>
+  {% for post in site.posts %}
+    <li>
+      <a href="{{ post.url }}">{{ post.title }}</a>
+      {{ post.excerpt }}
+    </li>
+  {% endfor %}
+</ul>
   {% include aside.html %}
   {% include contact.html %}
   {% include scripts.html %}
