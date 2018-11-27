@@ -1,10 +1,6 @@
 ---
-title: 702 OLED: New 700 Series on-camera monitor with stunning color 
-date: 2018-11-27 08:24:50 Z
-categories:
-- jekyll
-- community
-layout: post
+title: 2018 11 27 702 Oled New 700 Series On Camera Monitor With Stunning Color
+date: 2018-11-27 14:34:29.192000000 Z
 ---
 
 You’ll find this post in your `_posts` directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run `jekyll serve`, which launches a web server and auto-regenerates your site when a file is updated.
