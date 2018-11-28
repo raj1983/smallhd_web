@@ -6,6 +6,7 @@
 <body id="page-top">
   {% include nav.html %}
   {% include header.html %}
+  {% include monitors.html %}
   {% include services.html %}
   {% include call-to-action.html %}
   {% include portfolio.html %}
@@ -20,6 +21,47 @@
   {% include aside.html %}
   {% include contact.html %}
   {% include scripts.html %}
+  <script>
+  $.ajax({
+    dataType: "json",
+    url: 'http://172.16.1.152:8080/getIqcItemReceipts',
+    data: "",
+    success: function(response) {
+       //console.log(JSON.stringify(response));
+       if(!(response.error)){
+               var HTML = '';
+               $.each( response.data, function( key, val ) {
+                 var d = new Date(val.ir_date);
+                 var ir_date = (Number(d.getUTCMonth())+1)+'/'+d.getUTCDate()+'/'+d.getUTCFullYear();
+     var filter_date = new Date('2018-10-15');
+     if(d > filter_date){
+     var sumofqtys = 0;
+     var   nums = val.item_qtys.split(",");
+          for (i = 0; i < nums.length; i++) {
+      sumofqtys += parseInt(nums[i]);
+          }
+          var recent_ir_id = 0;
+                 if(recent_ir_id==val.ir_id && sumofqtys == total_qty_tested){
+                   var recent_classes = 'no-shadow border-0 bg-success text-white';
+                   var view_detail_html = 'Inspection Completed <i class="fa fa-check" aria-hidden="true"></i>';
+                 }else{
+                   var view_detail_html = '<a href="incomingqualitycheck/itemreceipt?ir_id='+val.ir_id+'" class="btn btn-lg btn-block btn-light">View Details <i class="fa fa-caret-right" aria-hidden="true"></i></a>';
+                   var recent_classes='';
+                 }
+                 HTML += '<div class="bright col-sm-4 text-center text"><a class="overlay" href="http://store.smallhd.com/FOCUS-OLED-Micro-HDMI-NPFW50"></a><img src="/img/uploads/ITE_MON-FOCUS-OLED-NPFW50-KIT_TH_MD.jpg" alt="FOCUS OLED HDMI NPFW50 Kit">               			<h3 title="FOCUS OLED HDMI NPFW50 Kit" class="text-uppercase">FOCUS OLED HDMI NPFW50 Kit</h3>               			<p>Professional grade camera-top monitor that can power your Sony mirrorless camera(NP-FW50 battery on...</p><a href="http://store.smallhd.com/FOCUS-OLED-Micro-HDMI-NPFW50" class="btn-border text-uppercase">shop now</a></div>';
+     }
+     });
+
+
+              $("#monitors").html(HTML);
+              $('#list-loader').hide();
+          }
+       },
+    error: function(e) {
+          console.log(e.message);
+     }
+  });
+  </script>
 </body>
 
 </html>
